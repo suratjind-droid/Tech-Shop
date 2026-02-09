@@ -21,7 +21,7 @@ namespace D3
             try
             {
                 CheckAndCreateDatabase();
-                //LoadUserData();
+                LoadUserData();
             }
             catch (Exception ex)
             {
@@ -55,8 +55,8 @@ namespace D3
                         """;
 
                     const string sampleDataSQL = """
-                        INSERT INTO userData (name, password, catagory, price, quantity) 
-                        VALUES ('guitar', '123', 'เครื่องสาย', '15,000', '1')
+                        INSERT INTO userData (name, catagory, price, quantity) 
+                        VALUES ('guitar', 'เครื่องสาย', '15,000', '1')
                         """;
 
                     using var cmd = new SQLiteCommand(createTableSQL, conn);
@@ -73,9 +73,89 @@ namespace D3
             }
         }
 
+        private void LoadUserData()
+        {
+            try
+            {
+                const string loadSQL = "SELECT * FROM userData ORDER BY userId";
+                using var conn = new SQLiteConnection(connString);
+                using var adapter = new SQLiteDataAdapter(loadSQL, conn);
+
+                var table = new DataTable();
+                adapter.Fill(table);
+                DGV.DataSource = table;
+
+                DGV.RowHeadersVisible = false;
+                AutoSizeColumns();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error โหลดข้อมูล: {ex.Message}", "ข้อผิดพลาด",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AutoSizeColumns()
+        {
+            foreach (DataGridViewColumn col in DGV.Columns)
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        private void ClearTextBoxes()
+        {
+            try
+            {
+                Name_Input.Clear();
+                Catagory_comboBox.Clear();
+                Price_Input.Clear();
+                Quantity_Input.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error ล้างข้อมูล: {ex.Message}", "ข้อผิดพลาด",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(usernameTxtb.Text) || string.IsNullOrWhiteSpace(passwordTxtb.Text))
+                {
+                    MessageBox.Show("กรุณากรอก username และ password", "ข้อมูลไม่ครบ",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                const string addSQL = """
+                    INSERT INTO userData (username, password, name, lastname, email) 
+                    VALUES (@username, @password, @name, @lastname, @email)
+                    """;
+
+                using var conn = new SQLiteConnection(connString);
+                conn.Open();
+                using var cmd = new SQLiteCommand(addSQL, conn);
+
+                cmd.Parameters.AddWithValue("@username", usernameTxtb.Text.Trim());
+                cmd.Parameters.AddWithValue("@password", passwordTxtb.Text.Trim());
+                cmd.Parameters.AddWithValue("@name", nameTxtb.Text.Trim());
+                cmd.Parameters.AddWithValue("@lastname", lastnameTxtb.Text.Trim());
+                cmd.Parameters.AddWithValue("@email", emailTxtb.Text.Trim());
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("เพิ่มข้อมูลผู้ใช้เรียบร้อย", "สำเร็จ",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTextBoxes();
+                    LoadUserData();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error เพิ่มข้อมูล: {ex.Message}", "ข้อผิดพลาด",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void label4_Click(object sender, EventArgs e)
