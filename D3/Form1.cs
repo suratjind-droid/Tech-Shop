@@ -119,43 +119,7 @@ namespace D3
 
         private void label1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(usernameTxtb.Text) || string.IsNullOrWhiteSpace(passwordTxtb.Text))
-                {
-                    MessageBox.Show("กรุณากรอก username และ password", "ข้อมูลไม่ครบ",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                const string addSQL = """
-                    INSERT INTO userData (username, password, name, lastname, email) 
-                    VALUES (@username, @password, @name, @lastname, @email)
-                    """;
-
-                using var conn = new SQLiteConnection(connString);
-                conn.Open();
-                using var cmd = new SQLiteCommand(addSQL, conn);
-
-                cmd.Parameters.AddWithValue("@username", usernameTxtb.Text.Trim());
-                cmd.Parameters.AddWithValue("@password", passwordTxtb.Text.Trim());
-                cmd.Parameters.AddWithValue("@name", nameTxtb.Text.Trim());
-                cmd.Parameters.AddWithValue("@lastname", lastnameTxtb.Text.Trim());
-                cmd.Parameters.AddWithValue("@email", emailTxtb.Text.Trim());
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    MessageBox.Show("เพิ่มข้อมูลผู้ใช้เรียบร้อย", "สำเร็จ",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearTextBoxes();
-                    LoadUserData();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error เพิ่มข้อมูล: {ex.Message}", "ข้อผิดพลาด",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
         }
 
         private void label4_Click(object sender, EventArgs e)

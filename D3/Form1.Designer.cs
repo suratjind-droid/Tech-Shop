@@ -347,7 +347,6 @@
             Controls.Add(groupBox1);
             Controls.Add(DGV);
             Controls.Add(Title);
-            Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)DGV).EndInit();
