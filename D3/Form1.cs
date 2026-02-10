@@ -106,7 +106,7 @@ namespace D3
             try
             {
                 Name_Input.Clear();
-                Catagory_comboBox.Clear();
+
                 Price_Input.Clear();
                 Quantity_Input.Clear();
             }

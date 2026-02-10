@@ -56,7 +56,7 @@
             Catagory = new Label();
             Name = new Label();
             Price = new Label();
-            button1 = new Button();
+            PDFgen = new Button();
             ((System.ComponentModel.ISupportInitialize)DGV).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -75,9 +75,9 @@
             // DGV
             // 
             DGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DGV.Location = new Point(373, 61);
+            DGV.Location = new Point(286, 61);
             DGV.Name = "DGV";
-            DGV.Size = new Size(477, 399);
+            DGV.Size = new Size(604, 460);
             DGV.TabIndex = 1;
             // 
             // groupBox1
@@ -109,7 +109,7 @@
             groupBox1.Controls.Add(Price);
             groupBox1.Location = new Point(12, 61);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(283, 399);
+            groupBox1.Size = new Size(268, 399);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "ข้อมูลสินค้า";
@@ -149,21 +149,21 @@
             Catagory_comboBox.Items.AddRange(new object[] { "เครื่องสาย", "เครื่องเป่าลมไม้", "เครื่องเป่าลมทองเหลือง", "เครื่องกระทบ", "เครื่องลิ่มนิ้ว" });
             Catagory_comboBox.Location = new Point(74, 58);
             Catagory_comboBox.Name = "Catagory_comboBox";
-            Catagory_comboBox.Size = new Size(148, 23);
+            Catagory_comboBox.Size = new Size(159, 23);
             Catagory_comboBox.TabIndex = 23;
             // 
             // Quantity_Input
             // 
             Quantity_Input.Location = new Point(74, 122);
             Quantity_Input.Name = "Quantity_Input";
-            Quantity_Input.Size = new Size(148, 23);
+            Quantity_Input.Size = new Size(159, 23);
             Quantity_Input.TabIndex = 22;
             // 
             // Price_Input
             // 
             Price_Input.Location = new Point(74, 90);
             Price_Input.Name = "Price_Input";
-            Price_Input.Size = new Size(148, 23);
+            Price_Input.Size = new Size(159, 23);
             Price_Input.TabIndex = 21;
             Price_Input.TextChanged += textBox2_TextChanged;
             // 
@@ -171,13 +171,13 @@
             // 
             Name_Input.Location = new Point(74, 29);
             Name_Input.Name = "Name_Input";
-            Name_Input.Size = new Size(148, 23);
+            Name_Input.Size = new Size(159, 23);
             Name_Input.TabIndex = 20;
             Name_Input.Enter += label1_Click;
             // 
             // Show_Button
             // 
-            Show_Button.Location = new Point(158, 355);
+            Show_Button.Location = new Point(130, 355);
             Show_Button.Name = "Show_Button";
             Show_Button.Size = new Size(110, 23);
             Show_Button.TabIndex = 19;
@@ -188,14 +188,14 @@
             // 
             Search_Button.Location = new Point(6, 355);
             Search_Button.Name = "Search_Button";
-            Search_Button.Size = new Size(118, 23);
+            Search_Button.Size = new Size(75, 23);
             Search_Button.TabIndex = 18;
             Search_Button.Text = "ค้นหา";
             Search_Button.UseVisualStyleBackColor = true;
             // 
             // Destroy_Button
             // 
-            Destroy_Button.Location = new Point(158, 313);
+            Destroy_Button.Location = new Point(130, 313);
             Destroy_Button.Name = "Destroy_Button";
             Destroy_Button.Size = new Size(75, 23);
             Destroy_Button.TabIndex = 17;
@@ -329,24 +329,25 @@
             Price.Text = "ราคา";
             Price.Click += label4_Click;
             // 
-            // button1
+            // PDFgen
             // 
-            button1.Location = new Point(18, 466);
-            button1.Name = "button1";
-            button1.Size = new Size(262, 55);
-            button1.TabIndex = 3;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            PDFgen.Location = new Point(18, 466);
+            PDFgen.Name = "PDFgen";
+            PDFgen.Size = new Size(262, 55);
+            PDFgen.TabIndex = 3;
+            PDFgen.Text = "file PDF";
+            PDFgen.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(902, 533);
-            Controls.Add(button1);
+            Controls.Add(PDFgen);
             Controls.Add(groupBox1);
             Controls.Add(DGV);
             Controls.Add(Title);
+            Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)DGV).EndInit();
@@ -386,6 +387,6 @@
         private TextBox Name_Input;
         private TextBox textBox7;
         private TextBox textBox6;
-        private Button button1;
+        private Button PDFgen;
     }
 }
